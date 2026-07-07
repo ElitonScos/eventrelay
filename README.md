@@ -1,5 +1,7 @@
 # EventRelay
 
+[![ci](https://github.com/ElitonScos/eventrelay/actions/workflows/ci.yml/badge.svg)](https://github.com/ElitonScos/eventrelay/actions/workflows/ci.yml)
+
 Async event processing pipeline built with FastAPI, RabbitMQ, and PostgreSQL. Publishes domain events to a topic exchange, processes them through a dedicated worker with dead-letter queue support, and persists results with full retry logic.
 
 ---
