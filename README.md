@@ -9,15 +9,15 @@ Async event processing pipeline built with FastAPI, RabbitMQ, and PostgreSQL. Pu
 ```
 POST /api/v1/events
         ↓
-FastAPI — persists event (status: queued)
+FastAPI - persists event (status: queued)
         ↓
-RabbitMQ — topic exchange (eventrelay)
+RabbitMQ - topic exchange (eventrelay)
         ↓
-Worker — consumes, processes, updates status
+Worker - consumes, processes, updates status
         ↓
-PostgreSQL — final state (processed / failed)
+PostgreSQL - final state (processed / failed)
         ↓
-Dead Letter Queue — events that exceed retry limit
+Dead Letter Queue - events that exceed retry limit
 ```
 
 ---
@@ -25,8 +25,8 @@ Dead Letter Queue — events that exceed retry limit
 ## Tech Stack
 
 - **Python 3.11** + **FastAPI**
-- **aio-pika** — async RabbitMQ client
-- **asyncpg** — async PostgreSQL driver
+- **aio-pika** - async RabbitMQ client
+- **asyncpg** - async PostgreSQL driver
 - **RabbitMQ 3.13** with Management UI
 - **PostgreSQL 16**
 - **Docker** + **Docker Compose**
@@ -90,10 +90,10 @@ Supported routing patterns: `order.*`, `payment.*`, `shipment.*`
 
 ## Reliability
 
-- **Persistent messages** — survive RabbitMQ restarts
-- **Dead Letter Queue** — failed events routed to `events.dead` after max retries
-- **Retry tracking** — retry count persisted per event
-- **Prefetch limit** — worker processes up to 10 messages concurrently
+- **Persistent messages** - survive RabbitMQ restarts
+- **Dead Letter Queue** - failed events routed to `events.dead` after max retries
+- **Retry tracking** - retry count persisted per event
+- **Prefetch limit** - worker processes up to 10 messages concurrently
 
 ---
 
@@ -102,15 +102,15 @@ Supported routing patterns: `order.*`, `payment.*`, `shipment.*`
 ```
 eventrelay/
 ├── app/
-│   ├── main.py            — FastAPI entrypoint, lifespan hooks
-│   ├── config.py          — env-based configuration
-│   ├── database.py        — asyncpg connection pool
-│   ├── publisher.py       — RabbitMQ async publisher
-│   ├── schemas.py         — Pydantic request/response models
+│   ├── main.py            - FastAPI entrypoint, lifespan hooks
+│   ├── config.py          - env-based configuration
+│   ├── database.py        - asyncpg connection pool
+│   ├── publisher.py       - RabbitMQ async publisher
+│   ├── schemas.py         - Pydantic request/response models
 │   └── routers/
-│       └── events.py      — event endpoints
+│       └── events.py      - event endpoints
 ├── worker/
-│   └── consumer.py        — RabbitMQ consumer with DLQ support
+│   └── consumer.py        - RabbitMQ consumer with DLQ support
 ├── migrations/
 │   └── 001_init.sql
 ├── docker/
